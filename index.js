@@ -7,7 +7,7 @@ import cors from 'cors';
 import authenticateToken from './middlewares/authenticateToken.js';
 
 dotenv.config();
-const { HTTP_PORT, SITE_URL } = process.env;
+const { PORT, SITE_URL } = process.env;
 const app = express();
 
 app.use(cors({
@@ -36,6 +36,6 @@ app.use((req, res, next) => {
 app.use(router);
 app.use(errorController)
 
-app.listen(HTTP_PORT, () => {
-    console.log(`Server is running on port ${HTTP_PORT}, SITE_URL: ${SITE_URL}`);
+app.listen(PORT, () => {
+    console.log(`Server is running on port ${PORT}, SITE_URL: ${SITE_URL}`);
 });
