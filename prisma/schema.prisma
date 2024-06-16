@@ -1,0 +1,32 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "mysql"
+  url      = "mysql://243228_csaavedra:fronterizo@mysql-cristhiansaavedra.alwaysdata.net:3306/cristhiansaavedra_syc_tickets"
+}
+
+model companies {
+  id   Int    @id @default(autoincrement())
+  name String @db.Text
+}
+
+model companies_users {
+  idUser    Int
+  idCompany Int
+
+  @@id([idUser, idCompany])
+}
+
+model users {
+  id                   Int     @id @default(autoincrement())
+  email                String  @unique(map: "email_unique") @db.VarChar(200)
+  password             String  @db.Text
+  name                 String? @db.Text
+  active               String  @default("N") @db.Text
+  activationCode       String? @db.Text
+  level                String  @default("U") @db.Text
+  recoveryPasswordCode String? @db.Text
+  avatar               String? @db.Text
+}
