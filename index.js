@@ -11,7 +11,7 @@ dotenv.config();
 const { HTTP_PORT } = process.env;
 const app = express();
 const corsOptions = {
-    origin: process.env.SITE_URL,
+    origin: '*',
     credentials: true
 }
 
