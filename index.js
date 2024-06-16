@@ -9,24 +9,24 @@ import authenticateToken from './middlewares/authenticateToken.js';
 dotenv.config();
 const { HTTP_PORT, SITE_URL } = process.env;
 const app = express();
-const corsOptions = {
-    origin: SITE_URL,
-    credentials: true
-}
 
-// Manejar solicitudes OPTIONS antes de las rutas principales
-app.options('*', cors(corsOptions));
+app.use(cors({
+    origin: '*'
+}))
 
-// Usar CORS con las opciones específicas
-app.use(cors(corsOptions));
 app.use(express.json());
+
+//Rutas públicas
 app.use(publicRouter);
+
+//Rutas privadas
 app.use((req, res, next) => {
     if (req.path === '/logout') {
         return next();
     }
     authenticateToken(req, res, next);
 });
+
 app.use(router);
 app.use(errorController)
 
