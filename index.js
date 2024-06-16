@@ -5,17 +5,14 @@ import publicRouter from './routes/public.routes.js';
 import errorController from './controllers/error/index.controller.js';
 import cors from 'cors';
 import authenticateToken from './middlewares/authenticateToken.js';
-import cookieParser from 'cookie-parser';
 
 dotenv.config();
 const { HTTP_PORT } = process.env;
 const app = express();
 const corsOptions = {
-    origin: '*',
-    credentials: true
+    origin: '*'
 }
 
-app.use(cookieParser());
 app.use(cors(corsOptions));
 app.use(express.json());
 app.use(publicRouter);
