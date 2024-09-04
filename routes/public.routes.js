@@ -1,6 +1,6 @@
 import express from 'express';
 import userController from '../controllers/user.controller.js';
-import { recipes } from '../services/recipes.js';
+import axios from 'axios';
 
 const router = express.Router();
 
@@ -13,7 +13,10 @@ router.get('/health-check', (req, res) => res.send('OK'))
 //get recipes from services/recipes.json
 
 router.get('/recipes', async (req, res) => {
-    res.send(recipes)
+    const url = 'https://raw.githubusercontent.com/sharonpiriz/librosRecetaJSON/main/productosTienda.json';
+    const response = await axios.get(url);
+    const recipes = response.data;
+    res.send(recipes);
 })
 
 export default router;
